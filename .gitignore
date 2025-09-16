@@ -1,0 +1,5 @@
+.env
+*.pyc
+__pycache__/
+instance/
+Real_Estate_Sales_2001-2022_GL.json
