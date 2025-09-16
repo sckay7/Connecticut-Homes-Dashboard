@@ -1,12 +1,10 @@
 from fastapi import APIRouter, HTTPException
-from src.config import get_database
-from dotenv import load_dotenv
+from src.services.db import get_database
 import os
 
 router = APIRouter()
 
-load_dotenv()
-MONGODB_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
+MONGODB_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME", "towns")
 
 @router.get("/toptowns")
 def toptowns():
