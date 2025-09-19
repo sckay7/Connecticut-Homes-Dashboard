@@ -1,10 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from src.services.db import get_database
-import os
+from src.config import MONGO_COLLECTION_NAME
 
 router = APIRouter()
-
-MONGODB_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME", "towns")
 
 @router.get("/toptowns")
 def toptowns():
@@ -19,7 +17,7 @@ def toptowns():
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"DB configuration error: {exc}")
 
-    towns = db.get_collection(MONGODB_COLLECTION_NAME)
+    towns = db.get_collection(MONGO_COLLECTION_NAME)
 
     pipeline = [
         {
@@ -51,7 +49,7 @@ def townslist():
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"DB configuration error: {exc}")
 
-    towns = db.get_collection(MONGODB_COLLECTION_NAME)
+    towns = db.get_collection(MONGO_COLLECTION_NAME)
 
     try:
         distinct_towns = towns.distinct("Town")

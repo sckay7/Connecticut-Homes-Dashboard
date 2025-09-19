@@ -1,14 +1,10 @@
-import os
 from typing import Optional
+from src.config import MONGODB_URI, MONGODB_DB
 
 try:
     from pymongo import MongoClient
-except Exception as exc:
-    raise RuntimeError("pymongo is required. Install with: pip install pymongo") from exc
-
-
-MONGODB_URI = os.getenv("MONGODB_URI")
-MONGODB_DB = os.getenv("MONGODB_DB")
+except Exception as e:
+    raise RuntimeError("pymongo is required. Install with: pip install pymongo") from e
 
 
 def get_mongo_client(uri: Optional[str] = None) -> MongoClient:
